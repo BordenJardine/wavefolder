@@ -1,0 +1,15 @@
+[package]
+name = "wave_folder_vst"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+conformal_vst_wrapper = "0.6.1"
+wave_folder_component = { path = "../component" }

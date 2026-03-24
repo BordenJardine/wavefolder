@@ -1,0 +1,59 @@
+{
+  "name": "wavefolder",
+  "private": true,
+  "workspaces": [
+    "web/*"
+  ],
+  "scripts": {
+    "bootstrap": "conformal-scripts bootstrap",
+    "bootstrap-rust-toolchain": "conformal-scripts bootstrap-rust-toolchain",
+    "ci": "conformal-scripts ci",
+    "check-lfs": "conformal-scripts check-lfs",
+    "check-todo": "conformal-scripts check-todo",
+    "check-format": "conformal-scripts check-format",
+    "check-licenses": "conformal-scripts check-licenses",
+    "create-plugin": "conformal-scripts create-plugin",
+    "format": "conformal-scripts format",
+    "web-dev": "conformal-scripts web-script -s dev",
+    "web-build": "conformal-scripts web-script -s build",
+    "web-lint": "conformal-scripts web-script -s lint",
+    "web-test": "bun test",
+    "rust-miri": "CARGO_TARGET_DIR=target/miri PROPTEST_DISABLE_FAILURE_PERSISTENCE=true MIRIFLAGS='-Zmiri-env-forward=PROPTEST_DISABLE_FAILURE_PERSISTENCE' conformal-scripts cargo +nightly miri test",
+    "rust-build": "conformal-scripts cargo build",
+    "rust-lint": "conformal-scripts cargo clippy",
+    "rust-test": "conformal-scripts cargo test",
+    "rust-bench": "conformal-scripts cargo bench",
+    "package": "conformal-scripts web-script -s package",
+    "validate": "conformal-scripts web-script -s validate",
+    "dev-mode": "conformal-scripts web-script -s dev-mode"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.3",
+    "eslint": "^9.39.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "@conformal/scripts": "^0.11.3",
+    "@happy-dom/global-registrator": "^20.3.3",
+    "tsconfig": "workspace:*"
+  },
+  "catalog": {
+    "@conformal/plugin": "^0.6.0",
+    "rollup-plugin-license": "^3.4.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.0",
+    "eslint-plugin-prefer-arrow-functions": "^3.9.1",
+    "typescript-eslint": "^8.56.0",
+    "vite": "^5.2.9",
+    "globals": "^17.3.0",
+    "@eslint/js": "^9.39.1",
+    "@vitejs/plugin-react": "^5.1.0",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "bun-plugin-react-compiler": "^0.3.2",
+    "@testing-library/react": "^16.3.2"
+  }
+}

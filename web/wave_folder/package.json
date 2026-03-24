@@ -1,0 +1,32 @@
+{
+  "name": "wave_folder",
+  "private": true,
+  "scripts": {
+    "dev": "bun ./index.html --port=5173",
+    "build": "tsc && vite build",
+    "lint": "tsc && eslint . --max-warnings 0",
+    "preview": "vite preview",
+    "check-format": "prettier --ignore-path .gitignore -c .",
+    "format": "prettier --ignore-path .gitignore --write .",
+    "package": "conformal-scripts package",
+    "validate": "conformal-scripts validate",
+    "dev-mode": "conformal-scripts dev-mode"
+  },
+  "type": "module",
+  "dependencies": {
+    "@conformal/plugin": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "rollup-plugin-license": "catalog:",
+    "bun-plugin-react-compiler": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
+    "vite": "catalog:",
+    "@testing-library/react": "catalog:",
+    "eslint-config-custom": "workspace:0.0.0"
+  }
+}

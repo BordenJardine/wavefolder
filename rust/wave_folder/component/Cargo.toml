@@ -1,0 +1,11 @@
+[package]
+name = "wave_folder_component"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+conformal_component = "0.5.0"

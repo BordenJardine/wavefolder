@@ -1,0 +1,8 @@
+{
+  "rustPackage": "wave_folder_vst",
+  "name": "Wavefolder",
+  "vendor": "borden",
+  "id": "com.TODO.wave_folder",
+  "sig": "TODO",
+  "version": "0.0.0"
+}
