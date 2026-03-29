@@ -1,4 +1,4 @@
-import { Info } from "@conformal/plugin";
+import { Info } from "@conformal/plugin"
 
 const infos = new Map<string, Info>(
   Object.entries({
@@ -9,16 +9,24 @@ const infos = new Map<string, Info>(
         default: false,
       },
     },
-    gain: {
-      title: "Gain",
+    fold: {
+      title: "FoldGain",
       type_specific: {
         t: "numeric",
-        default: 100,
-        valid_range: [0, 100],
-        units: "%",
+        default: 0.5,
+        valid_range: [0.5, 10.0],
+        units: "None",
+      },
+    },
+    modulator: {
+      title: "FoldType",
+      type_specific: {
+        t: "enum",
+        default: "sin",
+        values: ["sin", "tri"],
       },
     },
   }),
-);
+)
 
-export default infos;
+export default infos

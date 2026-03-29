@@ -4,7 +4,11 @@ use conformal_component::parameters::{self, Flags, InfoRef, TypeSpecificInfoRef}
 use conformal_component::pzip;
 use conformal_component::{Component as ComponentTrait, ProcessingEnvironment, Processor};
 
-const PARAMETERS: [InfoRef<'static, &'static str>; 2] = [
+const SIN_TYPE: u32 = 0;
+#[allow(unused)]
+const TRI_TYPE: u32 = 1;
+
+const PARAMETERS: [InfoRef<'static, &'static str>; 3] = [
     InfoRef {
         title: "Bypass",
         short_title: "Bypass",
@@ -13,14 +17,24 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 2] = [
         type_specific: TypeSpecificInfoRef::Switch { default: false },
     },
     InfoRef {
-        title: "Gain",
-        short_title: "Gain",
-        unique_id: "gain",
+        title: "FoldGain",
+        short_title: "FoldGain",
+        unique_id: "fold_gain",
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Numeric {
-            default: 100.,
-            valid_range: 0f32..=100.,
-            units: Some("%"),
+            default: 0.5,
+            valid_range: 0.5f32..=10.,
+            units: None,
+        },
+    },
+    InfoRef {
+        title: "FoldType",
+        short_title: "FoldType",
+        unique_id: "fold_type",
+        flags: Flags { automatable: true },
+        type_specific: TypeSpecificInfoRef::Enum {
+            default: 0,
+            values: &["sin", "tri"]
         },
     },
 ];
@@ -29,7 +43,9 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 2] = [
 pub struct Component {}
 
 #[derive(Clone, Debug, Default)]
-pub struct Effect {}
+pub struct Effect {
+    sampling_rate: f32,
+}
 
 impl Processor for Effect {
     fn set_processing(&mut self, _processing: bool) {}
@@ -45,15 +61,37 @@ impl EffectTrait for Effect {
     ) {
         let parameters = context.parameters();
         for (input_channel, output_channel) in channels(input).zip(channels_mut(output)) {
-            for ((input_sample, output_sample), (gain, bypass)) in input_channel
+            for ((input_sample, output_sample), (fold_gain, bypass, fold_type)) in input_channel
                 .iter()
                 .zip(output_channel.iter_mut())
-                .zip(pzip!(parameters[numeric "gain", switch "bypass"]))
+                .zip(pzip!(parameters[numeric "fold_gain", switch "bypass", enum "fold_type"]))
             {
-                *output_sample = *input_sample * (if bypass { 1.0 } else { gain / 100.0 });
+                *output_sample = if bypass {
+                    *input_sample
+                } else {
+                    fold(*input_sample * fold_gain, fold_type, self.sampling_rate)
+                }
             }
         }
     }
+}
+
+fn fold(sample: f32, fold_type: u32, sampling_rate: f32) -> f32 {
+    if  fold_type == SIN_TYPE {
+        sine_wave(sample,  sampling_rate / 2.5, sampling_rate)
+    } else {
+        triangle_wave(sample,  sampling_rate / 2.5, sampling_rate)
+    }
+}
+
+fn sine_wave(x: f32, freq: f32, sampling_rate: f32) -> f32 {
+    (2. * std::f32::consts::PI * x * freq / sampling_rate).sin()
+}
+
+fn triangle_wave(x: f32, freq: f32, sampling_rate: f32) -> f32 {
+    let p = (1. / freq) * sampling_rate;
+    let x2 = x + p / 4.;
+    4. * ((x2 / p) - ((x2 / p) + 0.5).floor()).abs() - 1.
 }
 
 impl ComponentTrait for Component {
@@ -63,7 +101,9 @@ impl ComponentTrait for Component {
         parameters::to_infos(&PARAMETERS)
     }
 
-    fn create_processor(&self, _env: &ProcessingEnvironment) -> Self::Processor {
-        Default::default()
+    fn create_processor(&self, env: &ProcessingEnvironment) -> Self::Processor {
+        Effect {
+            sampling_rate: env.sampling_rate,
+        }
     }
 }

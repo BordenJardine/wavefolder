@@ -1,29 +1,61 @@
-import { useNumericParam } from "@conformal/plugin";
+import { useEnumParam, useNumericParam } from "@conformal/plugin"
+
+const FOLD_INCREMENT = 0.01;
 
 const Layout = () => {
-  const { value: gain, set: setGain } = useNumericParam("gain");
+  const {
+    value: foldGain,
+    info: {
+      valid_range: [foldGainMin, foldGainMax],
+    },
+    set: setFoldGain,
+  } = useNumericParam("fold_gain")
+
+  const {
+    value: foldType,
+    info: {
+      values: foldTypeOptions,
+    },
+    set: setFoldType,
+  } = useEnumParam("fold_type")
 
   return (
     <div>
-      <p>Current gain: {gain}%</p>
+      <h1>WAVE HELLO</h1>
+      <p>Fold: {foldGain}</p>
       <p>
         <span
           onClick={() => {
-            setGain(Math.max(0, gain - 10));
+            setFoldGain(Math.max(foldGainMax, foldGain - FOLD_INCREMENT))
           }}
         >
           -
         </span>
         <span
           onClick={() => {
-            setGain(Math.min(100, gain + 10));
+            setFoldGain(Math.min(foldGainMin, foldGain + FOLD_INCREMENT))
           }}
         >
           +
         </span>
       </p>
+      <p>Type: {foldType}</p>
+      <p>
+      {
+        foldTypeOptions.map(opt => {
+          return <input
+            type="radio"
+            id={opt}
+            name="modOptions" // Same name for all in the group
+            value={opt}
+            checked={foldType === opt}
+            onChange={() => setFoldType(opt)}
+          />
+        })
+      }
+      </p>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
