@@ -26,14 +26,14 @@ const Layout = () => {
       <p>
         <span
           onClick={() => {
-            setFoldGain(Math.max(foldGainMax, foldGain - FOLD_INCREMENT))
+            setFoldGain(Math.max(foldGainMin, foldGain - FOLD_INCREMENT))
           }}
         >
           -
         </span>
         <span
           onClick={() => {
-            setFoldGain(Math.min(foldGainMin, foldGain + FOLD_INCREMENT))
+            setFoldGain(Math.min(foldGainMax, foldGain + FOLD_INCREMENT))
           }}
         >
           +

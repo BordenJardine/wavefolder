@@ -9,16 +9,16 @@ const infos = new Map<string, Info>(
         default: false,
       },
     },
-    fold: {
+    fold_gain: {
       title: "FoldGain",
       type_specific: {
         t: "numeric",
-        default: 0.5,
+        default: 1.0,
         valid_range: [0.5, 10.0],
         units: "None",
       },
     },
-    modulator: {
+    fold_type: {
       title: "FoldType",
       type_specific: {
         t: "enum",
@@ -26,6 +26,22 @@ const infos = new Map<string, Info>(
         values: ["sin", "tri"],
       },
     },
+    saturate: {
+      title: "Saturate",
+      type_specific: {
+        t: "switch",
+        default: false,
+      },
+    },
+    saturate_gain: {
+      title: "SaturatorGain",
+      type_specific: {
+        t: "numeric",
+        default: -0.2,
+        valid_range: [-0.5, -0.1],
+        units: "None",
+      },
+    }
   }),
 )
 
