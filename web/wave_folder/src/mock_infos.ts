@@ -10,7 +10,7 @@ const infos = new Map<string, Info>(
       },
     },
     fold_gain: {
-      title: "FoldGain",
+      title: "FoldAmount",
       type_specific: {
         t: "numeric",
         default: 1.0,
@@ -34,14 +34,23 @@ const infos = new Map<string, Info>(
       },
     },
     saturate_gain: {
-      title: "SaturatorGain",
+      title: "FoldGain",
       type_specific: {
         t: "numeric",
-        default: -0.2,
-        valid_range: [-0.5, -0.1],
+        default: -0.5,
+        valid_range: [-1.0, -0.0],
         units: "None",
       },
-    }
+    },
+    feedback: {
+      title: "Feedback",
+      type_specific: {
+        t: "numeric",
+        default: 0.0,
+        valid_range: [0.0, 0.9],
+        units: "None",
+      },
+    },
   }),
 )
 

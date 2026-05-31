@@ -8,7 +8,7 @@ const SIN_TYPE: u32 = 0;
 #[allow(unused)]
 const TRI_TYPE: u32 = 1;
 
-const PARAMETERS: [InfoRef<'static, &'static str>; 5] = [
+const PARAMETERS: [InfoRef<'static, &'static str>; 6] = [
     InfoRef {
         title: "Bypass",
         short_title: "Bypass",
@@ -17,9 +17,9 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 5] = [
         type_specific: TypeSpecificInfoRef::Switch { default: false },
     },
     InfoRef {
-        title: "FoldGain",
-        short_title: "FoldGain",
-        unique_id: "fold_gain",
+        title: "FoldAmount",
+        short_title: "FoldAmount",
+        unique_id: "fold_amount",
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Numeric {
             default: 1.0,
@@ -45,13 +45,13 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 5] = [
         type_specific: TypeSpecificInfoRef::Switch { default: false },
     },
     InfoRef {
-        title: "SaturatorGain",
-        short_title: "Saturation",
-        unique_id: "saturate_gain",
+        title: "FoldGain",
+        short_title: "FoldGain",
+        unique_id: "fold_gain",
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Numeric {
-            default: -0.2,
-            valid_range: -0.5f32..=-0.1,
+            default: -0.5,
+            valid_range: -1.0f32..=-0.0,
             units: Some("dB"),
         },
     },
@@ -60,7 +60,11 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 5] = [
         short_title: "Feedback",
         unique_id: "feedback",
         flags: Flags { automatable: true },
-        type_specific: TypeSpecificInfoRef::Switch { default: false },
+        type_specific: TypeSpecificInfoRef::Numeric {
+            default: 0.0,
+            valid_range: 0.0f32..=0.9,
+            units: None,
+        },
     },
 ];
 
@@ -89,27 +93,28 @@ impl EffectTrait for Effect {
         for (input_channel, output_channel) in channels(input).zip(channels_mut(output)) {
             for (
                 (input_sample, output_sample),
-                (fold_gain, bypass, fold_type, saturate, saturator_gain)
+                (fold_amount, bypass, fold_type, saturate, fold_gain, feedback)
             ) in input_channel
                 .iter()
                 .zip(output_channel.iter_mut())
                 .zip(pzip!(parameters[
-                    numeric "fold_gain",
+                    numeric "fold_amount",
                     switch "bypass",
                     enum "fold_type",
                     switch "saturate",
-                    numeric "saturate_gain",
-                    switch "feedback"
+                    numeric "fold_gain",
+                    numeric "feedback"
                 ]))
             {
                 *output_sample = if bypass {
                     *input_sample
                 } else {
                     self.fold(
-                        *input_sample * fold_gain,
+                        *input_sample,
+                        fold_amount,
                         fold_type,
                         saturate,
-                        saturator_gain,
+                        fold_gain,
                         self.sampling_rate,
                         feedback
                     )
@@ -123,20 +128,26 @@ impl Effect {
     fn fold(
         &mut self,
         sample: f32,
+        fold_amount: f32,
         fold_type: u32,
         saturate: bool,
-        saturator_gain: f32,
+        fold_gain: f32,
         sampling_rate: f32,
-        feedback: bool
+        feedback: f32
     ) -> f32 {
         let fold_wave = if fold_type == SIN_TYPE { sine_wave } else { triangle_wave };
 
-        let mut fold_result = fold_wave(sample,  sampling_rate / 2.5, sampling_rate);
+        let mut result = fold_gain * fold_wave(sample * fold_amount,  sampling_rate / 2.5, sampling_rate);
 
         if saturate {
-            fold_result = fold_result * saturator_gain + sample.tanh()
+            result = result + sample.tanh()
         };
 
+        result = result + (feedback * self.prev_output.tanh());
+
+        self.prev_output = result;
+
+        result
     }
 }
 
@@ -160,6 +171,7 @@ impl ComponentTrait for Component {
     fn create_processor(&self, env: &ProcessingEnvironment) -> Self::Processor {
         Effect {
             sampling_rate: env.sampling_rate,
+            prev_output: 0.
         }
     }
 }
