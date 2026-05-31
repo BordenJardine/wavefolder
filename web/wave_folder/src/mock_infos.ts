@@ -9,15 +9,6 @@ const infos = new Map<string, Info>(
         default: false,
       },
     },
-    fold_gain: {
-      title: "FoldAmount",
-      type_specific: {
-        t: "numeric",
-        default: 1.0,
-        valid_range: [0.5, 10.0],
-        units: "None",
-      },
-    },
     fold_type: {
       title: "FoldType",
       type_specific: {
@@ -26,29 +17,40 @@ const infos = new Map<string, Info>(
         values: ["sin", "tri"],
       },
     },
-    saturate: {
-      title: "Saturate",
-      type_specific: {
-        t: "switch",
-        default: false,
-      },
-    },
-    saturate_gain: {
-      title: "FoldGain",
+    fold_amount: {
+      title: "FoldAmount",
       type_specific: {
         t: "numeric",
-        default: -0.5,
-        valid_range: [-1.0, -0.0],
+        default: 1.0,
+        valid_range: [0.5, 10.0],
         units: "None",
       },
     },
-    feedback: {
-      title: "Feedback",
+    fold_gain: {
+      title: "FoldGain",
+      type_specific: {
+        t: "numeric",
+        default: 0.5,
+        valid_range: [0.0, 1.0],
+        units: "Db",
+      },
+    },
+    saturate_gain: {
+      title: "SaturateGain",
+      type_specific: {
+        t: "numeric",
+        default: 0.5,
+        valid_range: [0.0, 1.0],
+        units: "Db",
+      },
+    },
+    feedback_gain: {
+      title: "FeedbackGain",
       type_specific: {
         t: "numeric",
         default: 0.0,
         valid_range: [0.0, 0.9],
-        units: "None",
+        units: "Db",
       },
     },
   }),
