@@ -1,15 +1,16 @@
 import { useEnumParam, useNumericParam } from "@conformal/plugin"
+import Visualizer from './visualizer/Visualizer'
 
 const FOLD_INCREMENT = 0.01;
 
 const Layout = () => {
   const {
-    value: foldGain,
+    value: foldAmount,
     info: {
-      valid_range: [foldGainMin, foldGainMax],
+      valid_range: [foldAmountMin, foldAmountMax],
     },
-    set: setFoldGain,
-  } = useNumericParam("fold_gain")
+    set: setFoldAmount,
+  } = useNumericParam("fold_amount")
 
   const {
     value: foldType,
@@ -22,18 +23,18 @@ const Layout = () => {
   return (
     <div>
       <h1>WAVE HELLO</h1>
-      <p>Fold: {foldGain}</p>
+      <p>Fold: {foldAmount}</p>
       <p>
         <span
           onClick={() => {
-            setFoldGain(Math.max(foldGainMin, foldGain - FOLD_INCREMENT))
+            setFoldAmount(Math.max(foldAmountMin, foldAmount - FOLD_INCREMENT))
           }}
         >
           -
         </span>
         <span
           onClick={() => {
-            setFoldGain(Math.min(foldGainMax, foldGain + FOLD_INCREMENT))
+            setFoldAmount(Math.min(foldAmountMax, foldAmount + FOLD_INCREMENT))
           }}
         >
           +
@@ -54,6 +55,7 @@ const Layout = () => {
         })
       }
       </p>
+      <Visualizer />
     </div>
   )
 }

@@ -8,16 +8,16 @@ use conformal_component::{Component as ComponentTrait, ProcessingEnvironment, Pr
 
 use folder::Folder;
 
-const PARAMETERS: [InfoRef<'static, &'static str>; 6] = [
+const PARAMETERS: [InfoRef<'static, &'static str>; 7] = [
     InfoRef {
-        title: "Bypass",
+        title: "Bypass", // off/on
         short_title: "Bypass",
         unique_id: "bypass",
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Switch { default: false },
     },
     InfoRef {
-        title: "FoldType",
+        title: "FoldType", // sin/tri wave folding
         short_title: "FoldType",
         unique_id: "fold_type",
         flags: Flags { automatable: true },
@@ -27,7 +27,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 6] = [
         },
     },
     InfoRef {
-        title: "FoldAmount",
+        title: "FoldAmount", // how much to drive the wave folding function
         short_title: "FoldAmount",
         unique_id: "fold_amount",
         flags: Flags { automatable: true },
@@ -38,7 +38,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 6] = [
         },
     },
     InfoRef {
-        title: "FoldGain",
+        title: "FoldGain", // folded signal mix
         short_title: "FoldGain",
         unique_id: "fold_gain",
         flags: Flags { automatable: true },
@@ -49,7 +49,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 6] = [
         },
     },
     InfoRef {
-        title: "SaturateGain",
+        title: "SaturateGain", // saturator (not folded) mix
         short_title: "SaturateGain",
         unique_id: "saturate_gain",
         flags: Flags { automatable: true },
@@ -60,7 +60,14 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 6] = [
         },
     },
     InfoRef {
-        title: "FeedbackGain",
+        title: "AntiAlias",
+        short_title: "AntiAlias",
+        unique_id: "anti_alias",
+        flags: Flags { automatable: true },
+        type_specific: TypeSpecificInfoRef::Switch { default: true },
+    },
+    InfoRef {
+        title: "FeedbackGain", // feedback signal mix
         short_title: "FeedbackGain",
         unique_id: "feedback_gain",
         flags: Flags { automatable: true },
@@ -97,7 +104,7 @@ impl EffectTrait for Effect {
         for ((input_channel, output_channel), folder) in channels(input).zip(channels_mut(output)).zip(self.folders.iter_mut()) {
             for (
                 (input_sample, output_sample),
-                (bypass, fold_type, fold_amount, fold_gain, saturate_gain, feedback_gain)
+                (bypass, fold_type, fold_amount, fold_gain, saturate_gain, anti_alias, feedback_gain)
             ) in input_channel
                 .iter()
                 .zip(output_channel.iter_mut())
@@ -107,6 +114,7 @@ impl EffectTrait for Effect {
                     numeric "fold_amount",
                     numeric "fold_gain",
                     numeric "saturate_gain",
+                    switch "anti_alias",
                     numeric "feedback_gain"
                 ]))
             {
@@ -121,6 +129,7 @@ impl EffectTrait for Effect {
                         fold_gain,
                         saturate_gain,
                         feedback_gain,
+                        anti_alias,
                     )
                 }
             }

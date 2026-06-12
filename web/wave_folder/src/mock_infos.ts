@@ -35,6 +35,13 @@ const infos = new Map<string, Info>(
         units: "Db",
       },
     },
+    anti_alias: {
+      title: "AntiAlias",
+      type_specific: {
+        t: "switch",
+        default: true,
+      },
+    },
     saturate_gain: {
       title: "SaturateGain",
       type_specific: {

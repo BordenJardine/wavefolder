@@ -1,0 +1,9 @@
+.visualizer {
+  width: 100%;
+  aspectRatio: 1.618;
+  maxWidth: 600;
+}
+
+.foo {
+  background-color: lightblue;
+}
