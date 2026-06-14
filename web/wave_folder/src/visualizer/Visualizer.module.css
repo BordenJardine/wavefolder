@@ -1,9 +1,16 @@
 .visualizer {
-  width: 100%;
-  aspectRatio: 1.618;
-  maxWidth: 600;
+  width: 480px;
+  height: 323px;
+  margin: 40px auto;
+  position: relative;
 }
 
-.foo {
-  background-color: lightblue;
+.visualizer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/kanagawa_480x323.png');
+  background-size: cover;
+  opacity: 0.2;
+  z-index: -1;
 }

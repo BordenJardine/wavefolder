@@ -1,25 +1,25 @@
 import { Area, AreaChart } from 'recharts'
-import { sin } from '../waves'
-import kanagaUrl from '../assets/kanaga.jpg'
+import kanagawaUrl from '../assets/awaganak.png'
 import styles from './Visualizer.module.css'
+import useWaveFolder from './useWaveFolder.ts'
 
 const Visualizer = () => {
-  const data = sin()
+
+  const data = useWaveFolder()
 
   return (
-  <div className={styles.foo}>
+  <div className={styles.visualizer}>
     <AreaChart
       style={{
         width: '100%',
-        aspectRatio: 1.618,
-        maxWidth: 600
+        height: '100%',
       }}
       className={styles.visualizer}
       responsive data={data}
     >
       <defs>
-      <pattern id="wave" patternUnits="userSpaceOnUse" width={600} height={400}>
-        <image href={kanagaUrl} width={600} height={400} />
+      <pattern id="wave" patternUnits="userSpaceOnUse" width={480} height={323}>
+        <image href={kanagawaUrl} width={480} height={323} />
       </pattern>
       </defs>
       <Area
@@ -27,6 +27,7 @@ const Visualizer = () => {
         dataKey="y"
         dot={false}
         activeDot={false}
+        fillOpacity={1.0}
         fill="url(#wave)"
         isAnimationActive={false}
       />
