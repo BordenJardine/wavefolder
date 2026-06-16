@@ -1,30 +1,23 @@
 const RATE = 44100
 const FREQ = RATE / 2.5
 
-export const sinArray = () => {
-  const points = []
-  for (let i = 0; i <= 100; i++) {
-    const angle = (i / 100) * 4 * Math.PI
-    points.push({
-      x: i,
-      y: Math.sin(angle) * 100
-    })
-  }
-  return points
+export const sin = (x: number, freq=FREQ) => {
+  return Math.sin(2 * Math.PI * (x / freq))
 }
 
-export const sin = (n: number, freq=FREQ) => {
-  //return Math.sin(2 * Math.PI * n * freq / RATE)
-  return Math.sin(4 * Math.PI * (n / freq))
+export const sinFold = (x: number, freq=FREQ) => {
+  return Math.sin(2 * Math.PI * x * freq / RATE)
 }
 
-export const sinFold = (n: number, freq=FREQ) => {
-  return Math.sin(2 * Math.PI * n * freq / RATE)
+export const triFold = (x: number, freq=FREQ) => {
+  const p = 1 / freq * RATE
+  const x2 = x + p / 4
+  return 4 * Math.abs((x2 / p) - Math.floor((x2 / p) + 0.5)) - 1
 }
 
-export const toPoint = (n: number, i: number) => {
+export const toPoint = (x: number, i: number) => {
   return {
     x: i,
-    y: n
+    y: x
   }
 }

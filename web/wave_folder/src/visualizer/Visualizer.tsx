@@ -15,12 +15,23 @@ const Visualizer = () => {
         height: '100%',
       }}
       className={styles.visualizer}
-      responsive data={data}
+      responsive
+      data={data}
     >
       <defs>
       <pattern id="wave" patternUnits="userSpaceOnUse" width={480} height={323}>
         <image href={kanagawaUrl} width={480} height={323} />
       </pattern>
+      <linearGradient id="fadeOpacity" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="white" />
+        <stop offset="25%" stopColor="white" />
+        <stop offset="50%" stopColor="black" />
+        <stop offset="75%" stopColor="white" />
+        <stop offset="100%" stopColor="white" />
+      </linearGradient>
+      <mask id="fadeMask">
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#fadeOpacity)" />
+      </mask>
       </defs>
       <Area
         type="monotone"
@@ -30,6 +41,11 @@ const Visualizer = () => {
         fillOpacity={1.0}
         fill="url(#wave)"
         isAnimationActive={false}
+        style={{
+          mask: 'url(#fadeMask)',
+          height: '100%',
+          width: '100%'
+        }}
       />
     </AreaChart>
   </div>
