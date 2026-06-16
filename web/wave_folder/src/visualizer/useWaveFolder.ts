@@ -12,13 +12,12 @@ interface Point {
 const useWaveFolder = (): Point[] => {
   const { value: foldAmount } = useNumericParam("fold_amount")
   const { value: foldType } = useEnumParam("fold_type")
-  // const { value: foldGain } = useEnumParam("fold_gain")
-  // const { value: saturateGain } = useEnumParam("saturate_gain")
-  // const { value: feedbackGain } = useEnumParam("feedback_gain")
+  const { value: foldGain } = useNumericParam("fold_gain")
+  const { value: saturateGain } = useNumericParam("saturate_gain")
+  const { value: feedbackGain } = useNumericParam("feedback_gain")
 
   // this offset is just for the animation
   const [offset, setOffset] = useState(0)
-  // const [prevSignal, setPrevSignal] = useState(new Array(POINTS).fill(0))
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -29,15 +28,21 @@ const useWaveFolder = (): Point[] => {
 
   const folder = foldType == 'sin' ? sinFold : triFold
   const zeros = new Array(POINTS).fill(0)
-  const inputSignal = zeros.map((_, i) => sin(i, POINTS))
 
-  let outSignal = inputSignal
-    .map(x => folder(x * foldAmount))
-    .map(toPoint)
+  let x2 = 0
+  let outSignal = zeros
+    .map((x, i) => {
+       const sample = sin(i, POINTS) // 'input' signal is a sine wave
+       if (+foldGain > 0) x += +foldGain * folder(sample * foldAmount)
+       if (+saturateGain > 0) x += +saturateGain * Math.tanh(sample)
+       if (+feedbackGain > 0) x += +feedbackGain * Math.tanh(x2)
+       x2 = x
+       return x
+    })
 
   // rotate the array for animation
   const rotated = [...outSignal.slice(offset), ...outSignal.slice(0, offset)]
-  return rotated
+  return rotated.map(toPoint)
 }
 
 export default useWaveFolder

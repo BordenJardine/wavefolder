@@ -22,7 +22,6 @@ const Layout = () => {
 
   return (
     <div>
-      <h1>WAVE HELLO</h1>
       <p>Fold: {foldAmount}</p>
       <p>
         <span

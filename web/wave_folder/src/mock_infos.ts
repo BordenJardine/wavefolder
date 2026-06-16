@@ -30,7 +30,7 @@ const infos = new Map<string, Info>(
       title: "FoldGain",
       type_specific: {
         t: "numeric",
-        default: 0.5,
+        default: 1.0,
         valid_range: [0.0, 1.0],
         units: "Db",
       },
@@ -46,7 +46,7 @@ const infos = new Map<string, Info>(
       title: "SaturateGain",
       type_specific: {
         t: "numeric",
-        default: 0.5,
+        default: 0.0,
         valid_range: [0.0, 1.0],
         units: "Db",
       },

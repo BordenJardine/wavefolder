@@ -1,4 +1,4 @@
-import { Area, AreaChart } from 'recharts'
+import { Area, AreaChart, YAxis } from 'recharts'
 import kanagawaUrl from '../assets/awaganak.png'
 import styles from './Visualizer.module.css'
 import useWaveFolder from './useWaveFolder.ts'
@@ -33,6 +33,12 @@ const Visualizer = () => {
         <rect x="0" y="0" width="100%" height="100%" fill="url(#fadeOpacity)" />
       </mask>
       </defs>
+      <YAxis
+        type="number"
+        domain={[-1, 1]}
+        allowDataOverflow={false}
+        hide={true}
+      />
       <Area
         type="monotone"
         dataKey="y"

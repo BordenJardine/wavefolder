@@ -43,7 +43,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 7] = [
         unique_id: "fold_gain",
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Numeric {
-            default: 0.5,
+            default: 1.0,
             valid_range: 0.0f32..=1.0,
             units: Some("Db"),
         },
@@ -54,7 +54,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 7] = [
         unique_id: "saturate_gain",
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Numeric {
-            default: 0.5,
+            default: 0.0,
             valid_range: 0.0f32..=1.0,
             units:  Some("Db"),
         },
