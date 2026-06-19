@@ -15,8 +15,10 @@
   "type": "module",
   "dependencies": {
     "@conformal/plugin": "catalog:",
+    "@dsp-ts/math": "^0.1.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-knob-headless": "^0.4.0",
     "recharts": "^3.8.1"
   },
   "devDependencies": {
