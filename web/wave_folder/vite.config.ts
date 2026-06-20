@@ -2,13 +2,6 @@ import react from "@vitejs/plugin-react";
 import license from "rollup-plugin-license";
 import { join } from "path";
 
-const unwrap = (x: string | null, name: string, field: string): string => {
-  if (x === null) {
-    throw new Error(`Malformed dependency ${name} (${field})`);
-  }
-  return x;
-};
-
 /** @type {import('vite').UserConfig} */
 export default {
   plugins: [
@@ -26,9 +19,9 @@ export default {
               .map(
                 (dependency) =>
                   `-----
-${unwrap(dependency.name, "unknown", "name")} ${unwrap(dependency.version, dependency.name!, "version")} (${unwrap(dependency.license, dependency.name!, "license")})
+${dependency.name ?? "unknown"} ${dependency.version ?? "unknown"} (${dependency.license ?? "unknown"})
 
-${unwrap(dependency.licenseText, dependency.name!, "licenseText")}
+${dependency.licenseText ?? `(no license text included — see ${dependency.license ?? "package"} license)`}
 `,
               )
               .join("\n"),

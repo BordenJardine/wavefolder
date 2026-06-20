@@ -1,4 +1,21 @@
+@font-face {
+  font-family: 'OpenGorton';
+  src: url('./assets/OpenGorton-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenGorton';
+  src: url('./assets/OpenGorton-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   user-select: none;
   -webkit-user-select: none;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'OpenGorton', sans-serif;
 }

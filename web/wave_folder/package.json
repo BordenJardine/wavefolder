@@ -15,7 +15,6 @@
   "type": "module",
   "dependencies": {
     "@conformal/plugin": "catalog:",
-    "@dsp-ts/math": "^0.1.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-knob-headless": "^0.4.0",

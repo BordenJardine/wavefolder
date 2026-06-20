@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useEnumParam, useNumericParam } from "@conformal/plugin"
-import { sin, sinFold, triFold, toPoint } from '../waves'
+import { sin, sinFold, triFold, toPoint } from '../../utils/waves'
 
 const POINTS = 1000
 

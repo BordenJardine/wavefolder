@@ -34,7 +34,6 @@
       "name": "wave_folder",
       "dependencies": {
         "@conformal/plugin": "catalog:",
-        "@dsp-ts/math": "^0.1.0",
         "react": "catalog:",
         "react-dom": "catalog:",
         "react-knob-headless": "^0.4.0",
@@ -123,8 +122,6 @@
     "@conformal/scripts": ["@conformal/scripts@0.11.3", "", { "dependencies": { "@commander-js/extra-typings": "^14.0.0", "@conformal/create-plugin": "^0.12.1", "@conformal/stamp": "^0.5.0", "commander": "^14.0.3", "rcedit": "^5.0.2", "tmp-promise": "^3.0.3", "zod": "^4.3.6" }, "bin": { "conformal-scripts": "src/index.ts" } }, "sha512-NS5NqCAB8LR96kpPwEQgq9R9O28ZlXxvLk6Yiy6onhuGI5fn3hhomBit7nxx9YSUkjinzpGkqcBTZKEj3HRwJg=="],
 
     "@conformal/stamp": ["@conformal/stamp@0.5.0", "", { "dependencies": { "@commander-js/extra-typings": "^14.0.0", "@inquirer/prompts": "^8.2.1", "commander": "^14.0.3", "handlebars": "^4.7.8" } }, "sha512-spWyK7Lh46mfKvOp8+WClx8zZ1K8CfYPIPg/TjuLifFMvZfExXDF1wtCYAYFgeDNElm9YuO8fps6iDP8J8ZBYA=="],
-
-    "@dsp-ts/math": ["@dsp-ts/math@0.1.0", "", {}, "sha512-NDjfx30t9IPqbSKKYyjro0QXX4m6dgW4pnuAbNMI442ePKyn0xG/L2rTBYM5NoT3IP0Y2EA0hCPhXlVNvRb7Vg=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.21.5", "", { "os": "aix", "cpu": "ppc64" }, "sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ=="],
 

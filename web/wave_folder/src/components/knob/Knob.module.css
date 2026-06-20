@@ -1,0 +1,25 @@
+.graphics {
+}
+
+.label {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin: -10px;
+}
+
+.knob {
+  position: relative;
+}
+
+.legend {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-top: -15px;
+}

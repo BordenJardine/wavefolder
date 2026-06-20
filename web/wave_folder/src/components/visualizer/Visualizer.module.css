@@ -1,0 +1,24 @@
+.visualizer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 543px;
+  height: 365px;
+}
+
+.bg {
+  width: 553px;
+  margin-left: -5px;
+  height: 365px;
+  position: relative;
+}
+
+.bg::before {
+  content: "";
+  position: absolute;
+  inset: 0 5px;
+  background-image: url('../../assets/kanagawa543x365.png');
+  background-size: cover;
+  opacity: 0.2;
+  z-index: -1;
+}
