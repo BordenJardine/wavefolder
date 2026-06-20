@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useEnumParam, useNumericParam } from "@conformal/plugin"
 import { sin, sinFold, triFold, toPoint } from '../waves'
 
@@ -26,19 +26,21 @@ const useWaveFolder = (): Point[] => {
     return () => { clearInterval(id) }
   }, [])
 
-  const folder = foldType == 'sin' ? sinFold : triFold
-  const zeros = new Array(POINTS).fill(0)
+  const outSignal = useMemo(() => {
+    const folder = foldType == 'sin' ? sinFold : triFold
+    const zeros = new Array(POINTS).fill(0)
+    let x2 = 0
+    return zeros
+      .map((x, i) => {
+         const sample = sin(i, POINTS) // 'input' signal is a sine wave
+         if (+foldGain > 0) x += +foldGain * folder(sample * foldAmount)
+         if (+saturateGain > 0) x += +saturateGain * Math.tanh(sample)
+         if (+feedbackGain > 0) x += +feedbackGain * Math.tanh(x2)
+         x2 = x
+         return x
+      })
+  }, [ foldAmount, foldType, foldGain, saturateGain, feedbackGain ])
 
-  let x2 = 0
-  let outSignal = zeros
-    .map((x, i) => {
-       const sample = sin(i, POINTS) // 'input' signal is a sine wave
-       if (+foldGain > 0) x += +foldGain * folder(sample * foldAmount)
-       if (+saturateGain > 0) x += +saturateGain * Math.tanh(sample)
-       if (+feedbackGain > 0) x += +feedbackGain * Math.tanh(x2)
-       x2 = x
-       return x
-    })
 
   // rotate the array for animation
   const rotated = [...outSignal.slice(offset), ...outSignal.slice(0, offset)]
