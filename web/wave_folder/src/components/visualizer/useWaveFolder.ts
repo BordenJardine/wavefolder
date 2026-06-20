@@ -21,7 +21,7 @@ const useWaveFolder = (): Point[] => {
 
   useEffect(() => {
     const id = setInterval(() => {
-      setOffset(offset => (offset + 1) % POINTS)
+      setOffset(offset => (offset - 1 + POINTS) % POINTS)
     }, 16)
     return () => { clearInterval(id) }
   }, [])
