@@ -28,9 +28,11 @@ const Visualizer = () => {
         </pattern>
         <linearGradient id="fadeOpacity" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="white" />
-          <stop offset="25%" stopColor="white" />
+          <stop offset="15%" stopColor="white" />
+          <stop offset="40%" stopColor="black" />
           <stop offset="50%" stopColor="black" />
-          <stop offset="75%" stopColor="white" />
+          <stop offset="60%" stopColor="black" />
+          <stop offset="85%" stopColor="white" />
           <stop offset="100%" stopColor="white" />
         </linearGradient>
         <mask id="fadeMask">
