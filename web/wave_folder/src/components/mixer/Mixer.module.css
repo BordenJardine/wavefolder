@@ -1,0 +1,34 @@
+.mixer {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20px;
+}
+
+.sliderLabel {
+  display: block;
+  font-size: 10pt;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.sliderLabel.a {
+  right: 17px;
+}
+
+.sliderLabel.b {
+  bottom: 0px;
+}
+
+.sliderLabel.c {
+  left: 7px;
+}

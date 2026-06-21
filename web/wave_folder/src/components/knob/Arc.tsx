@@ -21,10 +21,16 @@ const Arc = ({ centerX, centerY, radius, value } : ArcProps) => {
   const progressX = centerX + radius * Math.cos(progressRad)
   const progressY = centerY + radius * Math.sin(progressRad)
 
+//  const glowColor = "#66bbff"
+//  const progressColor = "rgb(49, 190, 255)"
+
+  const glowColor = "#eedc76"
+  const progressColor = "#eecc76"
+
   return (
       < >
         <filter id="glow" colorInterpolationFilters="sRGB">
-          <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#66bbff" floodOpacity="0.7"/>
+          <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor={glowColor} floodOpacity="0.7"/>
           <feComposite
              operator="over"
              in="shadow"
@@ -45,7 +51,7 @@ const Arc = ({ centerX, centerY, radius, value } : ArcProps) => {
           <path
             d={`M ${startX} ${startY} A ${radius} ${radius} 0 ${value * sweepDeg > 180 ? 1 : 0} 1 ${progressX} ${progressY}`}
             strokeWidth="4"
-            stroke="rgb(49, 190, 255)"
+            stroke={progressColor}
             strokeLinecap="round"
             fill="transparent"
           />

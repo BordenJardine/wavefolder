@@ -73,7 +73,7 @@ const Knob = ({
           height: sizePx
         }}
       >
-      <svg width={size} height={size} className={styles.graphics}>
+      <svg width={sizePx} height={sizePx} className={styles.graphics}>
         {/* Active progress arc */}
         { showArc &&
           <Arc

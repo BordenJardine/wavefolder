@@ -12,12 +12,14 @@ const colors = {
   orange: {
     light: "#ce8039",
     mid: "#be6039",
-    dark: "#9e4029"
+    dark: "#9e4029",
+    stroke: "#863"
   },
   red: {
-    light: "#9e4939",
-    mid: "#7e0919",
-    dark: "#4e0009"
+    light: "#7e1929",
+    mid: "#5e0509",
+    dark: "#3e0009",
+    stroke: "#641"
   }
 }
 
@@ -30,13 +32,10 @@ const Cap = ({ centerX, centerY, radius, value, size = 'm', color = 'orange' } :
   const lineX2 = centerX + (radius * 0.8) * Math.cos(progressRad)
   const lineY2 = centerY + (radius * 0.8) * Math.sin(progressRad)
 
-//  const light = "#ce8039"
-//  const mid = "#be6039"
-//  const dark = "#9e4029"
-
   const light = colors[color].light
   const mid   = colors[color].mid
   const dark  = colors[color].dark
+  const stroke  = colors[color].stroke
 
   const strokeWidth = size == 'l' ? 3 : 2
 
@@ -51,12 +50,12 @@ const Cap = ({ centerX, centerY, radius, value, size = 'm', color = 'orange' } :
         </linearGradient>
       </defs>
       <filter id="shadow" colorInterpolationFilters="sRGB">
-        <feDropShadow dx="0" dy="3" stdDeviation="2" floodColor="#444" floodOpacity="0.3"/>
+        <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#333" floodOpacity="0.4"/>
       </filter>
       <g filter="url(#shadow)">
       { /* cap */ }
       <circle cx={centerX} cy={centerY} r={radius}
-        stroke="#863"
+        stroke={stroke}
         strokeWidth={strokeWidth}
         fill="url(#Gradient)"
       />
