@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .graphics {
 }
 
@@ -14,7 +20,8 @@
 }
 
 .label-m {
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 600;
   padding: 0;
   margin: 0;
   margin-bottom: -10px;
@@ -22,7 +29,7 @@
 
 .label-l {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 0px;
 }
 
@@ -40,7 +47,7 @@
   font-size: 12px;
   font-weight: 600;
   text-align: center;
-  margin-top: -15px;
+  margin-top: -10px;
 }
 
 .legend-l {

@@ -4,9 +4,24 @@ interface CapProps {
  radius: number
  value: number // 0.0..0.1
  size?: string
+ color?: 'red' | 'orange'
 }
 
-const Cap = ({ centerX, centerY, radius, value, size = 'm' } : CapProps) => {
+
+const colors = {
+  orange: {
+    light: "#ce8039",
+    mid: "#be6039",
+    dark: "#9e4029"
+  },
+  red: {
+    light: "#9e4939",
+    mid: "#7e0919",
+    dark: "#4e0009"
+  }
+}
+
+const Cap = ({ centerX, centerY, radius, value, size = 'm', color = 'orange' } : CapProps) => {
   const gapDeg = 30
   const sweepDeg = 360 - 2 * gapDeg
   const progressRad = (90 + gapDeg + value * sweepDeg) * Math.PI / 180
@@ -15,11 +30,15 @@ const Cap = ({ centerX, centerY, radius, value, size = 'm' } : CapProps) => {
   const lineX2 = centerX + (radius * 0.8) * Math.cos(progressRad)
   const lineY2 = centerY + (radius * 0.8) * Math.sin(progressRad)
 
-  const light = "#ce8039"
-  const mid = "#be6039"
-  const dark = "#9e4029"
+//  const light = "#ce8039"
+//  const mid = "#be6039"
+//  const dark = "#9e4029"
 
-  const stroke = size == 'l' ? 3 : 2
+  const light = colors[color].light
+  const mid   = colors[color].mid
+  const dark  = colors[color].dark
+
+  const strokeWidth = size == 'l' ? 3 : 2
 
   return (
     < >
@@ -38,7 +57,7 @@ const Cap = ({ centerX, centerY, radius, value, size = 'm' } : CapProps) => {
       { /* cap */ }
       <circle cx={centerX} cy={centerY} r={radius}
         stroke="#863"
-        strokeWidth={stroke}
+        strokeWidth={strokeWidth}
         fill="url(#Gradient)"
       />
       <line
@@ -46,14 +65,14 @@ const Cap = ({ centerX, centerY, radius, value, size = 'm' } : CapProps) => {
         y1={lineY1}
         x2={lineX2}
         y2={lineY2}
-        stroke="#eee"
-        strokeWidth={stroke}
+        stroke="#ddd"
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
       />
       { /* cover up the center janky capline bit */ }
       <circle cx={centerX} cy={centerY} r={1}
-        stroke="#be6039"
-        fill="#be6039"
+        stroke={mid}
+        fill={mid}
       />
       </g>
     </>

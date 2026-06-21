@@ -10,7 +10,7 @@ const mapTo01Linear = (val: number, min: number, max: number) => (val - min) / (
 const mapFrom01Linear = (normalized: number, min: number, max: number) => min + normalized * (max - min)
 
 const sizes = {
-  s: 40,
+  s: 50,
   m: 60,
   l: 90
 }
@@ -24,6 +24,7 @@ interface KnobProps {
   showLegend?: boolean
   showArc?: boolean
   size?: 's' | 'm' | 'l'
+  color?: 'red' | 'orange'
 }
 
 const Knob = ({
@@ -33,6 +34,7 @@ const Knob = ({
   setValue,
   label,
   size = 'm',
+  color = 'orange',
   showArc = true,
   showLegend = true
 }: KnobProps) => {
@@ -47,8 +49,10 @@ const Knob = ({
 
   const arcPadding = size == 'l' ? 15 : 12
 
+  const legendVal = Math.round(max <= 1 ? value * 10 : value)
+
   return (
-    <div className="flex flex-col items-center gap-2 p-6">
+    <div className={styles.container}>
       <label className={classNames(styles.label, styles[`label-${size}`])}>
         { label }
       </label>
@@ -65,13 +69,13 @@ const Knob = ({
         onValueRawChange={setValue}
         className={styles.knob}
         style={{
-        width: sizePx,
-        height: sizePx
+          width: sizePx,
+          height: sizePx
         }}
       >
       <svg width={size} height={size} className={styles.graphics}>
         {/* Active progress arc */}
-        {showArc &&
+        { showArc &&
           <Arc
             centerX={sizePx / 2}
             centerY={sizePx / 2}
@@ -87,12 +91,13 @@ const Knob = ({
           radius={radius - arcPadding}
           value={mapped}
           size={size}
+          color={color}
         />
       </svg>
       </KnobHeadless>
       {
         showLegend && <p className={classNames(styles.legend, styles[`legend-${size}`])}>
-          { Math.round(value) }
+          { legendVal }
         </p>
       }
     </div>
