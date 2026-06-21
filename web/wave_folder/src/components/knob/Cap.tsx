@@ -3,18 +3,23 @@ interface CapProps {
  centerY: number
  radius: number
  value: number // 0.0..0.1
+ size?: string
 }
 
-const Cap = ({ centerX, centerY, radius, value } : CapProps) => {
+const Cap = ({ centerX, centerY, radius, value, size = 'm' } : CapProps) => {
   const gapDeg = 30
   const sweepDeg = 360 - 2 * gapDeg
   const progressRad = (90 + gapDeg + value * sweepDeg) * Math.PI / 180
-  const progressX = centerX + radius * Math.cos(progressRad)
-  const progressY = centerY + radius * Math.sin(progressRad)
+  const lineX1 = centerX + (radius * 0.4) * Math.cos(progressRad)
+  const lineY1 = centerY + (radius * 0.4) * Math.sin(progressRad)
+  const lineX2 = centerX + (radius * 0.8) * Math.cos(progressRad)
+  const lineY2 = centerY + (radius * 0.8) * Math.sin(progressRad)
 
   const light = "#ce8039"
   const mid = "#be6039"
   const dark = "#9e4029"
+
+  const stroke = size == 'l' ? 3 : 2
 
   return (
     < >
@@ -33,18 +38,17 @@ const Cap = ({ centerX, centerY, radius, value } : CapProps) => {
       { /* cap */ }
       <circle cx={centerX} cy={centerY} r={radius}
         stroke="#863"
-        strokeWidth="2"
+        strokeWidth={stroke}
         fill="url(#Gradient)"
       />
       <line
-        x1={centerX}
-        y1={centerY}
-        x2={progressX}
-        y2={progressY}
+        x1={lineX1}
+        y1={lineY1}
+        x2={lineX2}
+        y2={lineY2}
         stroke="#eee"
-        strokeWidth="2"
+        strokeWidth={stroke}
         strokeLinecap="round"
-        strokeDasharray="0 4 6"
       />
       { /* cover up the center janky capline bit */ }
       <circle cx={centerX} cy={centerY} r={1}

@@ -1,14 +1,29 @@
 .graphics {
 }
 
+[role="slider"]:focus, [role="slider"]:focus-visible {
+  outline: none;
+}
+
 .label {
   display: block;
-  font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   text-align: center;
   padding: 0;
   margin: 0;
-  margin: -10px;
+}
+
+.label-m {
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: -10px;
+}
+
+.label-l {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0px;
 }
 
 .knob {
@@ -16,10 +31,21 @@
 }
 
 .legend {
-  font-size: 12px;
-  font-weight: 600;
   text-align: center;
   padding: 0;
   margin: 0;
+}
+
+.legend-m {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
   margin-top: -15px;
+}
+
+.legend-l {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: -10px;
 }

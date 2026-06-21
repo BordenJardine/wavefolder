@@ -30,7 +30,7 @@ conformal_vst_wrapper::wrap_factory!(
     Info {
         vendor: "borden",
         url: "TODO add URL",
-        email: "test@example.com",
-        version: "1.0.0",
+        email: "borden@nunya.biz",
+        version: "0.0.1",
     }
 );
