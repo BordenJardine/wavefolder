@@ -1,4 +1,4 @@
-const SineIcon = ({ active = false }) => {
+const SineIcon = ({ active = false }: { active?: boolean }) => {
   const glowColor = '#eedc76'
   const color = active ? '#eecc76': '#779'
   return (

@@ -22,6 +22,7 @@ const ControlPanel = () => {
           <WaveSelector />
         </div>
         <div className={classNames(styles.bigKnob, styles.controlSection)}>
+          { /* FOLD */ }
           <Knob
             label="折"
             min={foldAmountMin}

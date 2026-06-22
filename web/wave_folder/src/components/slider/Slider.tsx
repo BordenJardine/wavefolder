@@ -6,7 +6,7 @@ type SliderProps = {
   min: number
   max: number
   value: number
-  setValue: (value: number) => any
+  setValue: (value: number) => void
   label: string
   className?: string
   showLegend?: boolean
@@ -45,7 +45,7 @@ const Slider = ({
         max={max}
         value={value}
         step={step}
-        onChange={(e) => setValue(parseFloat(e.currentTarget.value))}
+        onChange={(e) => { setValue(parseFloat(e.currentTarget.value)) }}
       />
       { showLegend && legendJsx }
     </div>

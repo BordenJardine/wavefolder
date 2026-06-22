@@ -56,7 +56,7 @@ const Knob = ({
         { label }
       </label>
       <KnobHeadless
-        aria-label={label || 'knob'}
+        aria-label={label ?? 'knob'}
         valueRaw={value}
         valueMin={min}
         valueMax={max}

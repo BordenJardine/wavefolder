@@ -17,7 +17,7 @@ const WaveSelector = () => {
   const val = foldTypeOptions.indexOf(foldType)
 
   const setVal = (x: number) => {
-    setFoldType(foldTypeOptions[x] || 'sin')
+    setFoldType(foldTypeOptions[x] ?? 'sin')
   }
 
   return (
