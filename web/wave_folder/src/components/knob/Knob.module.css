@@ -20,13 +20,14 @@
 }
 
 .label-l {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 800;
   margin-bottom: 0px;
 }
 
 .knob {
   position: relative;
+  cursor: pointer;
 }
 
 .legend {

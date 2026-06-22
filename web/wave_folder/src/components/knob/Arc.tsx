@@ -1,4 +1,4 @@
-interface ArcProps {
+type ArcProps = {
  centerX: number
  centerY: number
  radius: number

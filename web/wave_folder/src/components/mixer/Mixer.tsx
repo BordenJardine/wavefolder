@@ -1,6 +1,6 @@
-import { useEnumParam, useNumericParam } from "@conformal/plugin"
+import {  useNumericParam } from "@conformal/plugin"
 import Slider from '../slider/Slider.tsx'
-import classNames from 'classNames'
+import classNames from 'classnames'
 import styles from './Mixer.module.css'
 
 const Mixer = () => {

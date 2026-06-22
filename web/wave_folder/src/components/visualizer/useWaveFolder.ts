@@ -4,7 +4,7 @@ import { sin, sinFold, triFold, toPoint } from '../../utils/waves'
 
 const POINTS = 1000
 
-interface Point {
+type Point = {
   x: number
   y: number
 }

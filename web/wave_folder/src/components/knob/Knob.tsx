@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { KnobHeadless } from 'react-knob-headless'
 import classNames from 'classnames'
 
@@ -15,11 +14,11 @@ const sizes = {
   l: 90
 }
 
-interface KnobProps {
+type KnobProps = {
   min: number
   max: number
   value: number
-  setValue: (value: number) => any
+  setValue: (value: number) => void
   label?: string
   showLegend?: boolean
   showArc?: boolean

@@ -1,4 +1,4 @@
-interface CapProps {
+type CapProps = {
  centerX: number
  centerY: number
  radius: number
@@ -43,10 +43,10 @@ const Cap = ({ centerX, centerY, radius, value, size = 'm', color = 'orange' } :
     < >
       <defs>
         <linearGradient id="Gradient" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color={light} />
-          <stop offset="33%" stop-color={mid} />
-          <stop offset="66%" stop-color={mid} />
-          <stop offset="100%" stop-color={dark} />
+          <stop offset="0%" stopColor={light} />
+          <stop offset="33%" stopColor={mid} />
+          <stop offset="66%" stopColor={mid} />
+          <stop offset="100%" stopColor={dark} />
         </linearGradient>
       </defs>
       <filter id="shadow" colorInterpolationFilters="sRGB">

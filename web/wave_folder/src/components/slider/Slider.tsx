@@ -1,8 +1,8 @@
-import classNames from 'classNames'
+import classNames from 'classnames'
 
 import styles from './Slider.module.css'
 
-interface SliderProps {
+type SliderProps = {
   min: number
   max: number
   value: number
@@ -11,7 +11,8 @@ interface SliderProps {
   className?: string
   showLegend?: boolean
   vert?: boolean
-  size?: 'm' | 'l'
+  size?: 's' | 'm'
+  step?: string | number
 }
 
 const Slider = ({
@@ -24,6 +25,7 @@ const Slider = ({
   className = '',
   showLegend = true,
   vert = true,
+  step = "any"
 } : SliderProps) => {
   const legendVal = Math.round(max <= 1 ? value * 10 : value)
 
@@ -31,19 +33,21 @@ const Slider = ({
     <p className={styles.legend}>{legendVal}</p>
   )
 
+  const dirClass = vert ? 'vert' : 'hoz'
+
   return (
     <div className={classNames(styles.container, className)}>
-    <input
-      aria-label={label}
-      type="range"
-      className={classNames(styles.slider, vert ? styles.vert : '', styles[size])}
-      min={min}
-      max={max}
-      value={value}
-      step="any"
-      onChange={(e) => setValue(parseFloat(e.currentTarget.value))}
-    />
-    { showLegend && legendJsx }
+      <input
+        aria-label={label}
+        type="range"
+        className={classNames(styles.slider, vert ? styles.vert : '', styles[size], styles[dirClass])}
+        min={min}
+        max={max}
+        value={value}
+        step={step}
+        onChange={(e) => setValue(parseFloat(e.currentTarget.value))}
+      />
+      { showLegend && legendJsx }
     </div>
   )
 }
