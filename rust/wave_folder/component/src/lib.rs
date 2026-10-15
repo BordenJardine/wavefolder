@@ -23,7 +23,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 7] = [
         flags: Flags { automatable: true },
         type_specific: TypeSpecificInfoRef::Enum {
             default: 0,
-            values: &["sin", "tri"]
+            values: &["sin", "tri"],
         },
     },
     InfoRef {
@@ -56,7 +56,7 @@ const PARAMETERS: [InfoRef<'static, &'static str>; 7] = [
         type_specific: TypeSpecificInfoRef::Numeric {
             default: 0.0,
             valid_range: 0.0f32..=1.0,
-            units:  Some("Db"),
+            units: Some("Db"),
         },
     },
     InfoRef {
@@ -101,10 +101,21 @@ impl EffectTrait for Effect {
         output: &mut impl BufferMut,
     ) {
         let parameters = context.parameters();
-        for ((input_channel, output_channel), folder) in channels(input).zip(channels_mut(output)).zip(self.folders.iter_mut()) {
+        for ((input_channel, output_channel), folder) in channels(input)
+            .zip(channels_mut(output))
+            .zip(self.folders.iter_mut())
+        {
             for (
                 (input_sample, output_sample),
-                (bypass, fold_type, fold_amount, fold_gain, saturate_gain, anti_alias, feedback_gain)
+                (
+                    bypass,
+                    fold_type,
+                    fold_amount,
+                    fold_gain,
+                    saturate_gain,
+                    anti_alias,
+                    feedback_gain,
+                ),
             ) in input_channel
                 .iter()
                 .zip(output_channel.iter_mut())

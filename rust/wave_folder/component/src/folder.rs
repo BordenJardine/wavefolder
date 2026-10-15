@@ -63,12 +63,7 @@ impl Folder {
         result
     }
 
-    fn apply_polyblamp(
-        &mut self,
-        fold_input: f32,
-        p: f32,
-        current_fold: &mut f32,
-    ) {
+    fn apply_polyblamp(&mut self, fold_input: f32, p: f32, current_fold: &mut f32) {
         let dx = fold_input - self.prev_fold_input;
         if dx.abs() < f32::EPSILON {
             return;

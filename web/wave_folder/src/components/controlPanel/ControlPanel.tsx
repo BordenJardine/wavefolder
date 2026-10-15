@@ -10,10 +10,10 @@ const ControlPanel = () => {
   const {
     value: foldAmount,
     info: {
-      valid_range: [foldAmountMin, foldAmountMax],
+      valid_range: [foldAmountMin, foldAmountMax]
     },
-    set: setFoldAmount,
-  } = useNumericParam("fold_amount")
+    set: setFoldAmount
+  } = useNumericParam('fold_amount')
 
   return (
     <section className={styles.parent}>
@@ -22,9 +22,9 @@ const ControlPanel = () => {
           <WaveSelector />
         </div>
         <div className={classNames(styles.bigKnob, styles.controlSection)}>
-          { /* FOLD */ }
+          {/* FOLD */}
           <Knob
-            label="折"
+            label="FOLD"
             min={foldAmountMin}
             max={foldAmountMax}
             value={foldAmount}
@@ -36,10 +36,9 @@ const ControlPanel = () => {
         <div>
           <Mixer />
         </div>
-    </div>
-  </section>
+      </div>
+    </section>
   )
-
 }
 
 export default ControlPanel

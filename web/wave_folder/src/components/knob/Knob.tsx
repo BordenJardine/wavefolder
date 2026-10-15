@@ -5,8 +5,10 @@ import Arc from './Arc'
 import Cap from './Cap'
 import styles from './Knob.module.css'
 
-const mapTo01Linear = (val: number, min: number, max: number) => (val - min) / (max - min)
-const mapFrom01Linear = (normalized: number, min: number, max: number) => min + normalized * (max - min)
+const mapTo01Linear = (val: number, min: number, max: number) =>
+  (val - min) / (max - min)
+const mapFrom01Linear = (normalized: number, min: number, max: number) =>
+  min + normalized * (max - min)
 
 const sizes = {
   s: 50,
@@ -53,7 +55,7 @@ const Knob = ({
   return (
     <div className={styles.container}>
       <label className={classNames(styles.label, styles[`label-${size}`])}>
-        { label }
+        {label}
       </label>
       <KnobHeadless
         aria-label={label ?? 'knob'}
@@ -72,33 +74,33 @@ const Knob = ({
           height: sizePx
         }}
       >
-      <svg width={sizePx} height={sizePx} className={styles.graphics}>
-        {/* Active progress arc */}
-        { showArc &&
-          <Arc
+        <svg width={sizePx} height={sizePx} className={styles.graphics}>
+          {/* Active progress arc */}
+          {showArc && (
+            <Arc
+              centerX={sizePx / 2}
+              centerY={sizePx / 2}
+              radius={radius - 5}
+              value={mapped}
+            />
+          )}
+
+          {/* Knob Cap */}
+          <Cap
             centerX={sizePx / 2}
             centerY={sizePx / 2}
-            radius={radius - 5}
+            radius={radius - arcPadding}
             value={mapped}
+            size={size}
+            color={color}
           />
-        }
-
-        { /* Knob Cap */ }
-        <Cap
-          centerX={sizePx / 2}
-          centerY={sizePx / 2}
-          radius={radius - arcPadding}
-          value={mapped}
-          size={size}
-          color={color}
-        />
-      </svg>
+        </svg>
       </KnobHeadless>
-      {
-        showLegend && <p className={classNames(styles.legend, styles[`legend-${size}`])}>
-          { legendVal }
+      {showLegend && (
+        <p className={classNames(styles.legend, styles[`legend-${size}`])}>
+          {legendVal}
         </p>
-      }
+      )}
     </div>
   )
 }

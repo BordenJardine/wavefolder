@@ -29,8 +29,8 @@ conformal_vst_wrapper::wrap_factory!(
     },
     Info {
         vendor: "borden",
-        url: "TODO add URL",
+        url: "https://github.com/BordenJardine/wavefolder",
         email: "borden@nunya.biz",
-        version: "0.0.1",
+        version: "0.1.0",
     }
 );

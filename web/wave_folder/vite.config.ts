@@ -1,42 +1,42 @@
-import react from "@vitejs/plugin-react";
-import license from "rollup-plugin-license";
-import { join } from "path";
+import react from '@vitejs/plugin-react'
+import license from 'rollup-plugin-license'
+import { join } from 'path'
 
 /** @type {import('vite').UserConfig} */
 export default {
   server: {
-    host: "127.0.0.1",
+    host: '127.0.0.1',
     port: 5173,
-    strictPort: true,
+    strictPort: true
   },
   plugins: [
     react({
       babel: {
-        plugins: ["babel-plugin-react-compiler"],
-      },
+        plugins: ['babel-plugin-react-compiler']
+      }
     }),
     license({
       thirdParty: {
         output: {
-          file: join(__dirname, "installer_resources", "license.txt"),
+          file: join(__dirname, 'installer_resources', 'license.txt'),
           template: (dependencies) =>
             dependencies
               .map(
                 (dependency) =>
                   `-----
-${dependency.name ?? "unknown"} ${dependency.version ?? "unknown"} (${dependency.license ?? "unknown"})
+${dependency.name ?? 'unknown'} ${dependency.version ?? 'unknown'} (${dependency.license ?? 'unknown'})
 
-${dependency.licenseText ?? `(no license text included — see ${dependency.license ?? "package"} license)`}
-`,
+${dependency.licenseText ?? `(no license text included — see ${dependency.license ?? 'package'} license)`}
+`
               )
-              .join("\n"),
+              .join('\n')
         },
         allow: {
           failOnUnlicensed: true,
           failOnViolation: true,
-          test: "(MIT OR ISC)",
-        },
-      },
-    }),
-  ],
-};
+          test: '(MIT OR ISC)'
+        }
+      }
+    })
+  ]
+}

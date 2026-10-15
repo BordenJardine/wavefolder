@@ -15,7 +15,7 @@
 }
 
 .bg::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0 5px;
   background-image: url('../../assets/kanagawa543x365.png');
