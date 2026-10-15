@@ -25,13 +25,11 @@ const Slider = ({
   className = '',
   showLegend = true,
   vert = true,
-  step = "any"
-} : SliderProps) => {
+  step = 'any'
+}: SliderProps) => {
   const legendVal = Math.round(max <= 1 ? value * 10 : value)
 
-  const legendJsx = (
-    <p className={styles.legend}>{legendVal}</p>
-  )
+  const legendJsx = <p className={styles.legend}>{legendVal}</p>
 
   const dirClass = vert ? 'vert' : 'hoz'
 
@@ -40,14 +38,21 @@ const Slider = ({
       <input
         aria-label={label}
         type="range"
-        className={classNames(styles.slider, vert ? styles.vert : '', styles[size], styles[dirClass])}
+        className={classNames(
+          styles.slider,
+          vert ? styles.vert : '',
+          styles[size],
+          styles[dirClass]
+        )}
         min={min}
         max={max}
         value={value}
         step={step}
-        onChange={(e) => { setValue(parseFloat(e.currentTarget.value)) }}
+        onChange={(e) => {
+          setValue(parseFloat(e.currentTarget.value))
+        }}
       />
-      { showLegend && legendJsx }
+      {showLegend && legendJsx}
     </div>
   )
 }

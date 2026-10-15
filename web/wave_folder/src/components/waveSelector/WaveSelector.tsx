@@ -1,4 +1,4 @@
-import {  useEnumParam } from "@conformal/plugin"
+import { useEnumParam } from '@conformal/plugin'
 
 import Slider from '../slider/Slider.tsx'
 import SineIcon from './SineIcon.tsx'
@@ -8,11 +8,9 @@ import styles from './WaveSelector.module.css'
 const WaveSelector = () => {
   const {
     value: foldType,
-    info: {
-      values: foldTypeOptions,
-    },
-    set: setFoldType,
-  } = useEnumParam("fold_type")
+    info: { values: foldTypeOptions },
+    set: setFoldType
+  } = useEnumParam('fold_type')
 
   const val = foldTypeOptions.indexOf(foldType)
 
@@ -41,7 +39,6 @@ const WaveSelector = () => {
       </div>
     </div>
   )
-
 }
 
 export default WaveSelector

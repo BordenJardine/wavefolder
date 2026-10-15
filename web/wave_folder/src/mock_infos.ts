@@ -1,66 +1,66 @@
-import { Info } from "@conformal/plugin"
+import { Info } from '@conformal/plugin'
 
 const infos = new Map<string, Info>(
   Object.entries({
     bypass: {
-      title: "Bypass",
+      title: 'Bypass',
       type_specific: {
-        t: "switch",
-        default: false,
-      },
+        t: 'switch',
+        default: false
+      }
     },
     fold_type: {
-      title: "FoldType",
+      title: 'FoldType',
       type_specific: {
-        t: "enum",
-        default: "sin",
-        values: ["sin", "tri"],
-      },
+        t: 'enum',
+        default: 'sin',
+        values: ['sin', 'tri']
+      }
     },
     fold_amount: {
-      title: "FoldAmount",
+      title: 'FoldAmount',
       type_specific: {
-        t: "numeric",
+        t: 'numeric',
         default: 1.0,
         valid_range: [0.5, 10.0],
-        units: "None",
-      },
+        units: 'None'
+      }
     },
     fold_gain: {
-      title: "FoldGain",
+      title: 'FoldGain',
       type_specific: {
-        t: "numeric",
+        t: 'numeric',
         default: 1.0,
         valid_range: [0.0, 1.0],
-        units: "Db",
-      },
+        units: 'Db'
+      }
     },
     anti_alias: {
-      title: "AntiAlias",
+      title: 'AntiAlias',
       type_specific: {
-        t: "switch",
-        default: true,
-      },
+        t: 'switch',
+        default: true
+      }
     },
     saturate_gain: {
-      title: "SaturateGain",
+      title: 'SaturateGain',
       type_specific: {
-        t: "numeric",
+        t: 'numeric',
         default: 0.0,
         valid_range: [0.0, 1.0],
-        units: "Db",
-      },
+        units: 'Db'
+      }
     },
     feedback_gain: {
-      title: "FeedbackGain",
+      title: 'FeedbackGain',
       type_specific: {
-        t: "numeric",
+        t: 'numeric',
         default: 0.0,
         valid_range: [0.0, 0.9],
-        units: "Db",
-      },
-    },
-  }),
+        units: 'Db'
+      }
+    }
+  })
 )
 
 export default infos

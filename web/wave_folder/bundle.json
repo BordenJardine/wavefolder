@@ -2,7 +2,7 @@
   "rustPackage": "wave_folder_vst",
   "name": "Wavefolder",
   "vendor": "borden",
-  "id": "com.TODO.wave_folder",
-  "sig": "TODO",
-  "version": "0.0.0"
+  "id": "com.borden.wavefolder",
+  "sig": "WVFD",
+  "version": "0.1.0"
 }
